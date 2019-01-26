@@ -14,7 +14,7 @@ class MusicListPresenter : BasePresenterImplemetation<MusicListContract.View>(),
 
     private fun getFiles(path: String): MutableList<Song> =
             File(path).listFiles().map{
-                Song(it.name, it.absolutePath)
+                Song(it.name.split('.')[0], it.absolutePath)
             }.toMutableList()
 
 }

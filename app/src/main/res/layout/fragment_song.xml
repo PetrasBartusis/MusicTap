@@ -12,16 +12,16 @@
         android:layout_width="wrap_content"
         android:layout_weight="3"
         android:layout_height="0dp"
-        android:background="@color/background"
+        android:background="@color/colorPrimary"
         android:padding="24dp"
         app:divided="true"
         app:dividerSize="16"
         app:barWidth="10"
         app:spaceBetweenBar="2"
         app:backgroundBarPrimeColor="#dfd6d6"
-        app:backgroundBarSecondaryColor="#e6e6ff"
+        app:backgroundBarSecondaryColor="#c4bbbb"
         app:LoadedBarPrimeColor="#b3b3ff"
-        app:LoadedBarSecondaryColor="#c4bbbb"/>
+        app:LoadedBarSecondaryColor="#8080ff"/>
 
     <LinearLayout
         android:layout_width="match_parent"

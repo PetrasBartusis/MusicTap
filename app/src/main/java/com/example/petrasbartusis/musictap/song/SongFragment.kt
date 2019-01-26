@@ -9,9 +9,6 @@ import com.example.petrasbartusis.musictap.Song
 import com.example.petrasbartusis.taskon_client.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_song.*
 import java.io.File
-import androidx.core.os.HandlerCompat.postDelayed
-
-
 
 class SongFragment : BaseFragment(), SongContract.View {
 
