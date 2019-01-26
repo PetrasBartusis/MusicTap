@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MusicTap</string>
+    <string name="choose_music_directory">Choose Music Directory</string>
 </resources>

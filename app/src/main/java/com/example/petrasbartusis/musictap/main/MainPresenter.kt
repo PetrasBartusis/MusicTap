@@ -12,9 +12,4 @@ class MainPresenter
     override fun onViewReady() {
 
     }
-
-    override fun playClicked() {
-        onView { startPlaying() }
-    }
-
 }
