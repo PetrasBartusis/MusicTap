@@ -9,10 +9,12 @@ interface SongContract {
         fun showToast(message: String)
         fun stopScrolling()
         fun setUpPlayer()
+        fun startScrolling()
     }
     interface Presenter: BasePresenter<View> {
         fun onViewReady()
         fun playSong(player: MediaPlayer?)
+        fun stopPlaying(player: MediaPlayer?)
 
     }
 }

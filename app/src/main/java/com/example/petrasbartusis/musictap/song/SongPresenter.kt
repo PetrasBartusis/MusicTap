@@ -9,12 +9,15 @@ class SongPresenter
         SongContract.Presenter {
 
     override fun playSong(player: MediaPlayer?) {
-        if (player != null && player.isPlaying) {
+        onView { startScrolling() }
+        player?.start()
+    }
+
+    override fun stopPlaying(player: MediaPlayer?) {
+        if(player != null) {
             player.stop()
-            //player.release()
+            player.release()
             onView { stopScrolling() }
-        } else {
-            player?.start()
         }
     }
 

@@ -2,12 +2,10 @@ package com.example.petrasbartusis.musictap.song
 
 import android.content.Context
 import android.content.Intent
-import android.media.MediaPlayer
 import android.os.Bundle
 import com.example.petrasbartusis.musictap.R
 import com.example.petrasbartusis.musictap.Song
 import com.example.petrasbartusis.taskon_client.base.BaseActivity
-import com.oze.music.musicbar.ScrollableMusicBar
 
 class SongActivity : BaseActivity() {
 

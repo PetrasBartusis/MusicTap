@@ -2,28 +2,74 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/background"
+    android:weightSum="4"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/songTitle"
-        android:textSize="18sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <com.oze.music.musicbar.ScrollableMusicBar
         android:id="@+id/scrollableMusicBar"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@android:color/white"
-        android:padding="8dp"
-        app:divided="false"
-        app:dividerSize="2"
-        app:barWidth="3"
+        android:layout_width="wrap_content"
+        android:layout_weight="3"
+        android:layout_height="0dp"
+        android:background="@color/background"
+        android:padding="24dp"
+        app:divided="true"
+        app:dividerSize="16"
+        app:barWidth="10"
         app:spaceBetweenBar="2"
         app:backgroundBarPrimeColor="#dfd6d6"
-        app:backgroundBarSecondaryColor="#c4bbbb"
-        app:LoadedBarPrimeColor="#fb4c01"
-        app:LoadedBarSecondaryColor="#eca277"/>
+        app:backgroundBarSecondaryColor="#e6e6ff"
+        app:LoadedBarPrimeColor="#b3b3ff"
+        app:LoadedBarSecondaryColor="#c4bbbb"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/songTimer"
+                android:layout_alignParentStart="true"
+                style="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textSize="24sp"
+                android:text="@string/time_placeholder"
+                android:padding="12dp"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/songTitle"
+                android:layout_alignParentEnd="true"
+                style="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textSize="24sp"
+                android:padding="12dp"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <ImageButton
+                android:id="@+id/btnPlay"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ic_play_light" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

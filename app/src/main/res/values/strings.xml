@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MusicTap</string>
     <string name="choose_music_directory">Choose Music Directory</string>
+    <string name="time_placeholder">0:00</string>
 </resources>
