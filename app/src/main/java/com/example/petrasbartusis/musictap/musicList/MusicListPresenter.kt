@@ -12,16 +12,6 @@ class MusicListPresenter : BasePresenterImplemetation<MusicListContract.View>(),
         onView { setItems(getFiles(directoryPath)) }
     }
 
-    override fun playSong(player: MediaPlayer?) {
-        if (player != null && player.isPlaying) {
-            player.stop()
-            player.release()
-            onView { resetPlayer() }
-        } else {
-            player?.start()
-        }
-    }
-
     private fun getFiles(path: String): MutableList<Song> =
             File(path).listFiles().map{
                 Song(it.name, it.absolutePath)

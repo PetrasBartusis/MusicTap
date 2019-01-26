@@ -11,9 +11,6 @@ import com.oze.music.musicbar.ScrollableMusicBar
 
 class SongActivity : BaseActivity() {
 
-    private var currentPlayer: MediaPlayer? = null
-    private var currentMusicBar: ScrollableMusicBar? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

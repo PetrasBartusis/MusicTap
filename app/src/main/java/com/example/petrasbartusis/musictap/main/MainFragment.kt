@@ -10,7 +10,6 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.petrasbartusis.musictap.R
 import com.example.petrasbartusis.musictap.musicList.MusicListActivity
-import com.example.petrasbartusis.musictap.song.MainPresenter
 import com.example.petrasbartusis.taskon_client.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 

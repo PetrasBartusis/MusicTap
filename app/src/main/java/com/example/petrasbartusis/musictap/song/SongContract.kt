@@ -7,7 +7,8 @@ import com.example.petrasbartusis.taskon_client.base.presenter.BasePresenter
 interface SongContract {
     interface View {
         fun showToast(message: String)
-        fun resetPlayer()
+        fun stopScrolling()
+        fun setUpPlayer()
     }
     interface Presenter: BasePresenter<View> {
         fun onViewReady()

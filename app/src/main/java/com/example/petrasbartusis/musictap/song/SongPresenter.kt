@@ -7,11 +7,18 @@ import com.example.petrasbartusis.taskon_client.base.presenter.BasePresenterImpl
 class SongPresenter
     : BasePresenterImplemetation<SongContract.View>(),
         SongContract.Presenter {
-    override fun playSong(player: MediaPlayer?) {
 
+    override fun playSong(player: MediaPlayer?) {
+        if (player != null && player.isPlaying) {
+            player.stop()
+            //player.release()
+            onView { stopScrolling() }
+        } else {
+            player?.start()
+        }
     }
 
     override fun onViewReady() {
-
+        onView { setUpPlayer() }
     }
 }
