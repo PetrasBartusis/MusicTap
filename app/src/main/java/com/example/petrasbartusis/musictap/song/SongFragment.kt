@@ -34,13 +34,13 @@ class SongFragment : BaseFragment(), SongContract.View {
 
         songTitle.text = song.name
 
-        btnPlay.setOnClickListener {
+        playButton.setOnClickListener {
             if(currentPlayer?.isPlaying == true){
                 presenter.stopPlaying(currentPlayer)
-                btnPlay.setImageResource(R.drawable.ic_play_light)
+                playButton.setImageResource(R.drawable.ic_play_arrow)
             } else {
                 presenter.playSong(currentPlayer)
-                btnPlay.setImageResource(R.drawable.ic_refresh_light)
+                playButton.setImageResource(R.drawable.ic_refresh_light)
                 songTimer.post(mUpdateTime)
             }
         }
