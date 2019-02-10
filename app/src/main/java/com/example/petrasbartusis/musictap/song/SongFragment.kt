@@ -4,6 +4,8 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import com.example.petrasbartusis.musictap.MusicPlayerImpl
 import com.example.petrasbartusis.musictap.R
 import com.example.petrasbartusis.musictap.Song
 import com.example.petrasbartusis.taskon_client.base.BaseFragment
@@ -14,14 +16,16 @@ class SongFragment : BaseFragment(), SongContract.View {
 
     private lateinit var presenter: SongContract.Presenter
 
-    private var currentPlayer: MediaPlayer? = null
-
     private lateinit var song: Song
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = SongPresenter()
         song = arguments?.getSerializable(KEY_SONG) as Song
+        presenter = SongPresenter(
+                MusicPlayerImpl(
+                        MediaPlayer.create(context, Uri.fromFile(File(song.path)))
+                )
+        )
         presenter.takeView(this)
     }
 
@@ -32,24 +36,25 @@ class SongFragment : BaseFragment(), SongContract.View {
         songTitle.text = song.name
 
         playButton.setOnClickListener {
-            if(currentPlayer?.isPlaying == true){
-                presenter.stopPlaying(currentPlayer)
-                playButton.setImageResource(R.drawable.ic_play_arrow)
-            } else {
-                presenter.playSong(currentPlayer)
-                playButton.setImageResource(R.drawable.ic_refresh_light)
-                songTimer.post(mUpdateTime)
-            }
+            presenter.onPlayCLicked()
         }
     }
 
-    override fun setUpPlayer() {
-        currentPlayer = MediaPlayer.create(context, Uri.fromFile(File(song.path)))
-        scrollableMusicBar.loadFrom(song.path, currentPlayer!!.duration)
+    override fun setPlayButtonIcon(isPlaying: Boolean) {
+        if(isPlaying){
+            playButton.setImageResource(R.drawable.ic_pause_black_24dp)
+            songTimer.post(presenter.updateTimer)
+        } else {
+            playButton.setImageResource(R.drawable.ic_play_arrow)
+        }
+    }
+
+    override fun setUpPlayer(duration: Int) {
+        scrollableMusicBar.loadFrom(song.path, duration)
     }
 
     override fun showToast(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 
     override fun startScrolling() {
@@ -57,7 +62,6 @@ class SongFragment : BaseFragment(), SongContract.View {
     }
 
     override fun stopScrolling() {
-        currentPlayer = MediaPlayer.create(context, Uri.fromFile(File(song.path)))
         scrollableMusicBar.stopAutoProgress()
     }
 
@@ -66,47 +70,13 @@ class SongFragment : BaseFragment(), SongContract.View {
         presenter.dropView()
     }
 
-    private val mUpdateTime = object : Runnable {
-        override fun run() {
-            val currentDuration: Int
-            if (currentPlayer!=null && currentPlayer?.isPlaying == true) {
-                currentDuration = currentPlayer?.currentPosition ?: 0
-                updatePlayer(currentDuration)
-                songTimer.postDelayed(this, 1000)
-            } else {
-                songTimer.removeCallbacks(this)
-            }
-        }
+    override fun updatePlayerData(action: Runnable, currentDuration: Int) {
+        songTimer.postDelayed(action, 1000)
+        songTimer.text = presenter.milliSecondsToTimer(currentDuration.toLong())
     }
 
-    private fun updatePlayer(currentDuration: Int) {
-        songTimer.text = "" + milliSecondsToTimer(currentDuration.toLong())
-    }
-
-    private fun milliSecondsToTimer(milliseconds: Long): String {
-        var finalTimerString = ""
-        var secondsString = ""
-
-        // Convert total duration into time
-        val hours = (milliseconds / (1000 * 60 * 60)).toInt()
-        val minutes = (milliseconds % (1000 * 60 * 60)).toInt() / (1000 * 60)
-        val seconds = (milliseconds % (1000 * 60 * 60) % (1000 * 60) / 1000).toInt()
-        // Add hours if there
-        if (hours > 0) {
-            finalTimerString = hours.toString() + ":"
-        }
-
-        // Prepending 0 to seconds if it is one digit
-        secondsString = if (seconds < 10) {
-            "0$seconds"
-        } else {
-            "" + seconds
-        }
-
-        finalTimerString = "$finalTimerString$minutes:$secondsString"
-
-        // return timer string
-        return finalTimerString
+    override fun stopPlayer(action: Runnable){
+        songTimer.removeCallbacks(action)
     }
 
     override fun layoutRes() = R.layout.fragment_song

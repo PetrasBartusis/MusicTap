@@ -1,20 +1,21 @@
 package com.example.petrasbartusis.musictap.song
 
-import android.media.MediaPlayer
-import com.example.petrasbartusis.musictap.Song
 import com.example.petrasbartusis.taskon_client.base.presenter.BasePresenter
 
 interface SongContract {
     interface View {
         fun showToast(message: String)
         fun stopScrolling()
-        fun setUpPlayer()
+        fun setUpPlayer(duration: Int)
         fun startScrolling()
+        fun setPlayButtonIcon(isPlaying: Boolean)
+        fun stopPlayer(action: Runnable)
+        fun updatePlayerData(action: Runnable, currentDuration: Int)
     }
     interface Presenter: BasePresenter<View> {
         fun onViewReady()
-        fun playSong(player: MediaPlayer?)
-        fun stopPlaying(player: MediaPlayer?)
-
+        fun onPlayCLicked()
+        var updateTimer: Runnable
+        fun milliSecondsToTimer(milliseconds: Long): String
     }
 }
